@@ -5,6 +5,9 @@ on:
     tags:
       - 'v*.*.*'
 
+permissions:
+  contents: write
+
 env:
   TIZEN_STUDIO_VER: 5.6
 
@@ -59,13 +62,25 @@ jobs:
           echo 'export PATH=$PATH:${GITHUB_WORKSPACE}/tizen-studio/tools/ide/bin' >> .bashrc
 
       - name: Prepare Tizen Certificate
+        env:
+          AUTHOR_KEY: ${{ secrets.TIZEN_AUTHOR_KEY }}
+          KEY_PW: ${{ secrets.TIZEN_AUTHOR_KEY_PW || 'serafimflix' }}
         run: |
           mkdir -p "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/"
-          echo "${{ secrets.TIZEN_AUTHOR_KEY }}" | base64 -d > "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizenbrew-author.p12"
+          if [ -n "$AUTHOR_KEY" ]; then
+            echo "$AUTHOR_KEY" | base64 -d > "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizenbrew-author.p12"
+          else
+            # Sem certificado salvo nos secrets: gera um de autor na hora.
+            # A TV não exige um fixo, porque o TizenBrew Installer reassina o pacote na instalação.
+            ./tizen-studio/tools/ide/bin/tizen certificate -a SerafimFlix -p "$KEY_PW" -c BR -n SerafimFlix -f tizenbrew-author
+            P12="$(find "$HOME" "$GITHUB_WORKSPACE" -name tizenbrew-author.p12 -not -path "*/tizen-studio-data/keystore/author/tizenbrew-author.p12" 2>/dev/null | head -1)"
+            [ -n "$P12" ] && cp "$P12" "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/tizenbrew-author.p12"
+          fi
+          ls -la "${GITHUB_WORKSPACE}/tizen-studio-data/keystore/author/"
           ./tizen-studio/tools/ide/bin/tizen cli-config "profiles.path=${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
           cp .github/assets/profiles.xml "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
           sed -i "s|\$GITHUB_WORKSPACE|${GITHUB_WORKSPACE}|g" "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
-          sed -i "s|\$KEY_PW|${{ secrets.TIZEN_AUTHOR_KEY_PW }}|g" "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
+          sed -i "s|\$KEY_PW|${KEY_PW}|g" "${GITHUB_WORKSPACE}/tizen-studio-data/profile/profiles.xml"
           chmod 755 "./tizen-studio-data/profile/profiles.xml"
 
       - name: Build TizenBrew
@@ -75,19 +90,19 @@ jobs:
 
       - name: Package TizenBrew for Old Tizen
         env:
-          PASSWORD: ${{ secrets.TIZEN_AUTHOR_KEY_PW }}
+          PASSWORD: ${{ secrets.TIZEN_AUTHOR_KEY_PW || 'serafimflix' }}
           APP_PATH: tizenbrew-app/TizenBrew
           CERT: TizenBrew-Old
         run: |
           expect ./package.exp
           cat "${GITHUB_WORKSPACE}/tizen-studio-data/cli/logs/cli.log"
-          mv tizenbrew-app/TizenBrew/release/TizenBrewNextGeneration.wgt tizenbrew-app/TizenBrew/release/TizenBrewStandalone-Old.wgt
+          mv tizenbrew-app/TizenBrew/release/*.wgt tizenbrew-app/TizenBrew/release/SerafimFlixPlus.wgt
 
       - name: Upload TizenBrew package artifact for Old Tizen
         uses: actions/upload-artifact@v4
         with:
             name: app-${{ github.sha }}-old.wgt
-            path: tizenbrew-app/TizenBrew/release/TizenBrewStandalone-Old.wgt
+            path: tizenbrew-app/TizenBrew/release/SerafimFlixPlus.wgt
       
       - name: Release TizenBrew Build Results
         uses: softprops/action-gh-release@v1
