@@ -85,8 +85,21 @@ if [ -z "$TV_IP" ]; then
   TV_IP="$(pergunta "Digite o IP da TV (ex.: 192.168.0.15):")"
 fi
 
+# A TV diz em :8001/api/v2/ se o Developer Mode está ligado e qual Host PC IP está nele.
+campo_tv() { curl -s -m 3 "http://$TV_IP:8001/api/v2/" | grep -o "\"$1\": *\"[^\"]*\"" | head -1 | cut -d'"' -f4; }
+
 # ---------- 5. Conectar ----------
 passo "Conectando na TV"
+MODO="$(campo_tv developerMode)"; DEV_IP="$(campo_tv developerIP)"
+if [ "$MODO" = "0" ]; then
+  erro "O Developer mode está desligado na TV. Liga ele (Apps → 1 2 3 4 5) e reinicia a TV segurando o botão."
+  sair
+fi
+if [ -n "$DEV_IP" ] && [ -n "$MAC_IP" ] && [ "$DEV_IP" != "$MAC_IP" ]; then
+  erro "O Host PC IP na TV está $DEV_IP, mas precisa ser $MAC_IP."
+  info "Troca no Developer mode e reinicia a TV segurando o botão. Depois roda este instalador de novo."
+  sair
+fi
 "$SDB" disconnect "$TV_IP" >/dev/null 2>&1
 CON="$("$SDB" connect "$TV_IP" 2>&1)"
 if ! "$SDB" devices 2>/dev/null | grep -q "$TV_IP"; then
@@ -123,5 +136,10 @@ cat <<TXT
   Depois é só abrir o ${NEG}SerafimFlix+${FIM} na lista de apps. 🍿
 TXT
 "$SDB" disconnect "$TV_IP" >/dev/null 2>&1
+info "Vou ficar de olho até você trocar o IP na TV…"
+for _ in $(seq 1 120); do
+  [ "$(campo_tv developerIP)" = "127.0.0.1" ] && { ok "Host PC IP = 127.0.0.1. Agora é só reiniciar a TV segurando o botão."; break; }
+  sleep 5
+done
 printf "\n${VERDE}${NEG}  Pronto!${FIM}\n"
 sair 0
