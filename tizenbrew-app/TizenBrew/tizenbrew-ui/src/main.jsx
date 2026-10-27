@@ -13,7 +13,7 @@ window.addEventListener('keydown', (e) => {
     } else if (e.keyCode === 10009) {
         if (location.pathname !== '/tizenbrew-ui/dist/index.html') {
             history.back();
-            setFocus('sn:focusable-item-1');
+            setFocus('nav-home');
         } else {
             tizen.application.getCurrentApplication().exit();
         }

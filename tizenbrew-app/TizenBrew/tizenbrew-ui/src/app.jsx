@@ -12,6 +12,7 @@ import './components/i18n.js';
 import UserAgentSettings from './pages/UserAgentSettings.jsx';
 import { ExclamationCircleIcon } from '@heroicons/react/16/solid';
 import { useTranslation } from 'react-i18next';
+import Splash from './components/Splash.jsx';
 
 export default function App() {
   const headerRef = useRef(null);
@@ -50,13 +51,12 @@ export default function App() {
     <ErrorBoundary>
       <LocationProvider>
         <Header ref={headerRef} />
-        <div className="bg-slate-800 text-white overflow-hidden" style={{ height: `calc(100vh - ${headerHeight}px)` }}>
-          <div className={`flex justify-center ${!context.state.sharedData.error.message ? 'hidden' : ''}`}>
-            <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 bg-slate-900 mt-8 w-[95vw] text-red-400" role="alert">
-              <ExclamationCircleIcon className="h-[4vw] w-[2vw] mr-2" />
-              <div>
-                <span class="text-2xl">{t(context.state.sharedData.error.message, context.state.sharedData.error.args)}</span>
-              </div>
+        {!context.state.sharedData.modules && !context.state.sharedData.error.message ? <Splash /> : null}
+        <div className="text-white overflow-x-hidden overflow-y-auto pb-[6vh]" style={{ height: `calc(100vh - ${headerHeight}px)` }}>
+          <div className={`px-[5vw] ${!context.state.sharedData.error.message ? 'hidden' : ''}`}>
+            <div className="flex items-center p-[2vh] rounded-2xl bg-red-950/70 ring-1 ring-red-500/40 mt-[2vh]" role="alert">
+              <ExclamationCircleIcon className="h-[4vh] w-[4vh] mr-[1vw] text-red-400 shrink-0" />
+              <span className="text-[2.4vh] text-red-200">{t(context.state.sharedData.error.message, context.state.sharedData.error.args)}</span>
             </div>
           </div>
           <Router>

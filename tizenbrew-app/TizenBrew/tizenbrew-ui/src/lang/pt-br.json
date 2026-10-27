@@ -1,44 +1,44 @@
 {
     "service": {
-        "alreadyRunning": "Serviço já está executando.",
-        "started": "Serviço iniciado.",
-        "connected": "Serviço conectado ao aplicativo."
+        "alreadyRunning": "Tudo no jeito.",
+        "started": "Esquentando os motores…",
+        "connected": "Tudo pronto!"
     },
     "errors": {
-        "serviceDidntConnectYet": "Você não pode iniciar módulos enquanto o serviço ainda não estiver conectado ao aplicativo.",
-        "moduleNotFound": "Erro: Não foi possivel achar o módulo {{moduleName}}.",
-        "crashedServices": "Erro: Os seguintes serviços cairam: {{services}}.",
-        "debuggingNotEnabled": "Erro: Não foi possivel conectar a Daemon SDB. Tem certeza que trocou o Host PC IP para 127.0.0.1? Se sim, segure o botão de desligar até ver o logotipo da Samsung.",
-        "noModules": "Parcee que não instalou nenhum módulo ainda. Use o botão [VERDE] para acessar o gerenciador de módulos."
+        "serviceDidntConnectYet": "Calma, ainda tô acordando. Tenta de novo em um segundinho.",
+        "moduleNotFound": "Ih, não achei o app {{moduleName}}. Confere o nome em Apps.",
+        "crashedServices": "Eita, esses serviços caíram: {{services}}.",
+        "debuggingNotEnabled": "Não consegui conversar com a TV. Confere se o Host PC IP do Modo Desenvolvedor está como 127.0.0.1 e, se estiver, segura o botão de desligar até aparecer o logo da Samsung.",
+        "noModules": "Nenhum app por aqui ainda. Vai em Apps e adiciona o primeiro."
     },
     "moduleManager": {
-        "confirmDelete": "Você quer remover {{packageName}}?",
-        "addNPM": "Adicionar módulo NPM",
-        "addNPMDesc": "Isso é primariamente para produção e para usuários.",
-        "addGH": "Adicionar módulo GitHub",
-        "addGHDesc": "Isso é primariamente para desenvolvimento e para desenvolvedores.",
-        "addModule": "Adicionar Módulo",
-        "moduleName": "Nome do Módulo (Para {{type}}):"
+        "confirmDelete": "Tirar o {{packageName}} daqui? Dá pra colocar de volta depois.",
+        "addNPM": "Adicionar do NPM",
+        "addNPMDesc": "Pra apps publicados no NPM, tipo o TizenTube.",
+        "addGH": "Adicionar do GitHub",
+        "addGHDesc": "Seu repositório já vem preenchido. Só falta a pasta.",
+        "addModule": "Adicionar app",
+        "moduleName": "Nome do app ({{type}}):"
     },
     "settings": {
-        "autolaunch": "Autolaunch Configurações",
-        "autolaunchDesc": "Inicie seu módulo favorito automaticamente quando iniciar o TizenBrew.",
-        "autolaunchService": "Configurações do Autolaunch para serviços",
-        "autolaunchServiceDesc": "Inicie seu serviço favorito automaticamente quando iniciar o TizenBrew.",
-        "useragent": "Configurações do User-Agent",
-        "useragentDesc": "Mudar o User-Agent dos módulos do TizenBrew para alguns efeitos como corrigir a UI no TizenTube.",
-        "enableAutolaunchPrompt": "Você quer que {{packageName}} inicie automaticamente?",
-        "disableAutolaunchPrompt": "Você quer desativar o Autolaunch?",
-        "disableAutolaunch": "Desativar Autolaunch",
-        "noModules": "Nenhum módulo encontrado.",
+        "autolaunch": "Abrir um app direto",
+        "autolaunchDesc": "Liga a TV, abre o Seraflix+ e já cai no seu app favorito. Sem escala.",
+        "autolaunchService": "Serviços automáticos",
+        "autolaunchServiceDesc": "Liga sozinho o serviço de fundo de algum app quando o Seraflix+ abrir.",
+        "useragent": "User-Agent",
+        "useragentDesc": "Coisa de nerd: muda como os apps enxergam a sua TV. Às vezes conserta o YouTube.",
+        "enableAutolaunchPrompt": "Abrir o {{packageName}} sempre que o Seraflix+ ligar?",
+        "disableAutolaunchPrompt": "Desligar a abertura automática?",
+        "disableAutolaunch": "Não abrir nada sozinho",
+        "noModules": "Nenhum app instalado ainda.",
         "default": "Padrão",
         "worksOnTizen": "(Funciona no Tizen {{version}}+)",
-        "uaBasedOnDevice": "User-Agent baseado no Dispositivo (deve trazer alguns recursos)",
-        "setUaTo": "Você quer mudar o User-Agent para {{userAgent}}?",
-        "uaSetRelaunch": "User-Agent set. Relaunch the app to apply changes.",
-        "uaNegativeEffects": "Note que mesmo que isso possa ter efeitos positivos, também poderá ter efeitos negativos.",
-        "language": "Configurações de idioma",
-        "languageDesc": "Mudar o idioma do aplicativo."
+        "uaBasedOnDevice": "Baseado nesta TV (pode liberar uns recursos)",
+        "setUaTo": "Trocar o User-Agent para {{userAgent}}?",
+        "uaSetRelaunch": "Feito! Fecha e abre o Seraflix+ de novo pra valer.",
+        "uaNegativeEffects": "Pode melhorar umas coisas e piorar outras. Se der ruim, volta pro Padrão.",
+        "language": "Idioma",
+        "languageDesc": "Mudar o idioma do app."
     },
     "__contributors": [
         "nicejs-is-cool"

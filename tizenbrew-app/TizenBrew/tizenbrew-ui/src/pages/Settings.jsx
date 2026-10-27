@@ -1,45 +1,13 @@
-import { setFocus, useFocusable } from '@noriginmedia/norigin-spatial-navigation'
-import { useEffect, useContext } from 'react';
+import { setFocus } from '@noriginmedia/norigin-spatial-navigation'
+import { useContext } from 'react';
 import { GlobalStateContext } from '../components/ClientContext.jsx';
 import { Events } from '../components/WebSocketClient.js';
 import { useLocation } from 'preact-iso';
 import { useTranslation } from 'react-i18next';
-
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
+import Card, { PageTitle } from '../components/Card.jsx';
 
 function ItemBasic({ children, onClick, shouldFocus }) {
-    const { ref, focused, focusSelf } = useFocusable();
-    useEffect(() => {
-        if (focused) {
-            ref.current.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-                inline: 'center',
-            });
-        }
-
-    }, [focused, ref]);
-
-    if (shouldFocus) {
-        useEffect(() => {
-            focusSelf();
-        }, [ref]);
-    }
-
-    return (
-        <div
-            ref={ref}
-            onClick={onClick}
-            className={classNames(
-                'relative bg-gray-900 shadow-2xl rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10 h-[35vh] w-[20vw]',
-                focused ? 'focus' : '',
-            )}
-        >
-            {children}
-        </div>
-    );
+    return <Card onClick={onClick} shouldFocus={shouldFocus} className="setting-card">{children}</Card>;
 }
 export default function Settings() {
     const { state } = useContext(GlobalStateContext);
@@ -47,16 +15,17 @@ export default function Settings() {
     const { t } = useTranslation();
 
     return (
-        <div className="relative isolate lg:px-8">
-            <div className="mx-auto flex flex-wrap justify-center gap-4 top-4 relative">
+        <div className="px-[5vw] pt-[3vh]">
+            <PageTitle title="Ajustes" subtitle="Mexe à vontade, mas com carinho." />
+            <div className="flex flex-wrap">
                 <ItemBasic onClick={() => {
                     if (state.sharedData.modules?.length === 0) return alert(t('settings.noModules'));
                     loc.route('/tizenbrew-ui/dist/index.html/settings/change?type=autolaunch');
                 }}>
-                    <h3 className='text-indigo-400 text-base/7 font-semibold'>
+                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
                         {t('settings.autolaunch')}
                     </h3>
-                    <p className='text-gray-300 mt-6 text-base/7'>
+                    <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
                         {t('settings.autolaunchDesc')}
                     </p>
                 </ItemBasic>
@@ -64,20 +33,20 @@ export default function Settings() {
                     if (state.sharedData.modules?.length === 0) return alert(t('settings.noModules'));
                     loc.route('/tizenbrew-ui/dist/index.html/settings/change?type=autolaunchService');
                 }}>
-                    <h3 className='text-indigo-400 text-base/7 font-semibold'>
+                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
                         {t('settings.autolaunchService')}
                     </h3>
-                    <p className='text-gray-300 mt-6 text-base/7'>
+                    <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
                         {t('settings.autolaunchServiceDesc')}
                     </p>
                 </ItemBasic>
                 <ItemBasic onClick={() => {
                     loc.route('/tizenbrew-ui/dist/index.html/settings/change-ua');
                 }}>
-                    <h3 className='text-indigo-400 text-base/7 font-semibold'>
+                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
                         {t('settings.useragent')}
                     </h3>
-                    <p className='text-gray-300 mt-6 text-base/7'>
+                    <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
                         {t('settings.useragentDesc')}
                     </p>
                 </ItemBasic>
@@ -92,8 +61,9 @@ function Change() {
     const { t } = useTranslation();
 
     return (
-        <div className="relative isolate lg:px-8">
-            <div className="mx-auto flex flex-wrap justify-center gap-4 top-4 relative">
+        <div className="px-[5vw] pt-[3vh]">
+            <PageTitle title={loc.query.type === 'autolaunchService' ? 'Serviço que liga sozinho' : 'App que abre sozinho'} subtitle="Escolhe um. Segura a seta pra cima ao abrir se quiser pular." />
+            <div className="flex flex-wrap">
                 {state?.sharedData?.modules?.map((module, idx) => {
                     if (loc.query.type === 'autolaunchService' && !module.serviceFile) return null;
                     return (
@@ -110,15 +80,15 @@ function Change() {
                                         }
                                     });
                                     loc.route('/tizenbrew-ui/dist/index.html/settings');
-                                    setFocus('sn:focusable-item-1');
+                                    setFocus('nav-home');
                                 }
                             }}>
                             <h3
-                                className='text-indigo-400 text-base/7 font-semibold'
+                                className='text-sky-400 text-[2.8vh] font-bold'
                             >
                                 {module.appName} ({module.version})
                             </h3>
-                            <p className='text-gray-300 mt-6 text-base/7'>
+                            <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
                                 {module.description}
                             </p>
                         </ItemBasic>
@@ -136,10 +106,10 @@ function Change() {
                                 }
                             });
                             loc.route('/tizenbrew-ui/dist/index.html/settings');
-                            setFocus('sn:focusable-item-1');
+                            setFocus('nav-home');
                         }
                     }}>
-                    <h3 className='text-indigo-400 text-base/7 font-semibold'>
+                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
                         {t('settings.disableAutolaunch')}
                     </h3>
                 </ItemBasic>

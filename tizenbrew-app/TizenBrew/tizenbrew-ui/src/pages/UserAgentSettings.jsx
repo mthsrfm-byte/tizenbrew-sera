@@ -1,6 +1,5 @@
-import { useFocusable } from "@noriginmedia/norigin-spatial-navigation";
 import { useTranslation } from "react-i18next";
-import { useEffect } from "react";
+import Card, { PageTitle } from "../components/Card.jsx";
 
 const UserAgents = [
     {
@@ -38,47 +37,16 @@ const UserAgents = [
     }
 ];
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-}
-
 function ItemBasic({ children, onClick, shouldFocus }) {
-    const { ref, focused, focusSelf } = useFocusable();
-    useEffect(() => {
-        if (focused) {
-            ref.current.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-                inline: 'center',
-            });
-        }
-    }, [focused, ref]);
-
-    if (shouldFocus) {
-        useEffect(() => {
-            focusSelf();
-        }, [ref]);
-    }
-
-    return (
-        <div
-            ref={ref}
-            onClick={onClick}
-            className={classNames(
-                'relative bg-gray-900 shadow-2xl rounded-3xl p-8 ring-1 ring-gray-900/10 sm:p-10 h-[35vh] w-[20vw]',
-                focused ? 'focus' : '',
-            )}
-        >
-            {children}
-        </div>
-    );
+    return <Card onClick={onClick} shouldFocus={shouldFocus} className="setting-card">{children}</Card>;
 }
 
 export default function UserAgentSettings() {
     const { t } = useTranslation();
     return (
-        <div className="relative isolate lg:px-8">
-            <div className="mx-auto flex flex-wrap justify-center gap-4 top-4 relative">
+        <div className="px-[5vw] pt-[3vh]">
+            <PageTitle title="User-Agent" subtitle="Coisa de nerd: muda como os apps enxergam a sua TV. Na dúvida, deixa no Padrão." />
+            <div className="flex flex-wrap">
                 {UserAgents.map((ua, idx) => {
                     return (
                         <ItemBasic key={idx} onClick={() => {
@@ -89,10 +57,10 @@ export default function UserAgentSettings() {
                                 tizen.application.getCurrentApplication().exit();
                             }
                         }} shouldFocus={idx === 0}>
-                            <h3 className='text-indigo-400 text-base/7 font-semibold'>
+                            <h3 className='text-sky-400 text-[2.8vh] font-bold'>
                                 {t(ua.name)}
                             </h3>
-                            <p className='text-gray-300 mt-6 text-base/7'>
+                            <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
                                 {ua.worksOnTizen ? t('settings.worksOnTizen', { version: ua.worksOnTizen }) : ''}
                             </p>
                         </ItemBasic>
@@ -103,7 +71,7 @@ export default function UserAgentSettings() {
                     alert(t('settings.uaSetRelaunch'));
                     tizen.application.getCurrentApplication().exit();
                 }}>
-                    <h3 className='text-indigo-400 text-base/7 font-semibold'>
+                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
                         {t('settings.default')}
                     </h3>
                 </ItemBasic>
