@@ -72,7 +72,14 @@ function Field({ label, value, onChange, placeholder, hint, shouldFocus }) {
                 value={value}
                 placeholder={placeholder}
                 onInput={(e) => onChange(e.target.value)}
-                onKeyDown={(e) => { if (DONE_KEYS.includes(e.keyCode)) e.target.blur(); }}
+                onKeyDown={(e) => {
+                    // Sem isso o Enter "vaza" para o atalho global, que clica no cartão e reabre o teclado.
+                    if (DONE_KEYS.includes(e.keyCode)) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        e.target.blur();
+                    }
+                }}
                 className="field-input"
             />
             {hint ? <p className="text-[1.9vh] text-[#6E6C66] mt-[0.8vh]">{hint}</p> : null}

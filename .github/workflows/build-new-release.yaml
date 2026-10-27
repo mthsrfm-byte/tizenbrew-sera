@@ -9,7 +9,7 @@ on:
       version:
         description: 'Versão do instalador (ex.: v2.1.0)'
         required: true
-        default: 'v2.1.0'
+        default: 'v2.1.1'
 
 permissions:
   contents: write
@@ -103,6 +103,11 @@ jobs:
           expect ./package.exp
           cat "${GITHUB_WORKSPACE}/tizen-studio-data/cli/logs/cli.log"
           mv tizenbrew-app/TizenBrew/release/*.wgt tizenbrew-app/TizenBrew/release/SerafimFlixPlus.wgt
+
+      - name: Zip do instalador para Mac
+        run: |
+          cd instalar
+          zip -q "${GITHUB_WORKSPACE}/tizenbrew-app/TizenBrew/release/Instalar-SerafimFlix-Mac.zip" "Instalar SerafimFlix+.command"
 
       - name: Upload TizenBrew package artifact for Old Tizen
         uses: actions/upload-artifact@v4

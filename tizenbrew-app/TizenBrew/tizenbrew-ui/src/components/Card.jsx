@@ -12,9 +12,9 @@ export default function Card({ children, onClick, shouldFocus, className = '', s
     useEffect(() => {
         if (focused) {
             ref.current.scrollIntoView({
-                behavior: 'smooth',
-                block: 'center',
-                inline: 'center',
+                behavior: 'auto',
+                block: 'nearest',
+                inline: 'nearest',
             });
         }
     }, [focused, ref]);

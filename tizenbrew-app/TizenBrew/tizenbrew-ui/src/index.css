@@ -62,14 +62,16 @@ html, body {
     border-radius: 2.4vh;
     background: #1C1C1A;
     border: 0.35vh solid rgba(245, 244, 239, 0.06);
-    transition: transform .15s ease-out, box-shadow .15s ease-out, border-color .15s;
+    transition: transform .15s ease-out;
+    will-change: transform;
 }
 
 .focus {
     outline: none;
     transform: scale(1.04);
     border-color: #3347FF;
-    box-shadow: 0 0 0 0.35vh rgba(169, 180, 245, 0.55), 0 2vh 6vh rgba(51, 71, 255, 0.28);
+    /* Só o anel, sem sombra borrada: blur grande pesa no navegador da TV. */
+    box-shadow: 0 0 0 0.35vh rgba(169, 180, 245, 0.55);
     z-index: 2;
 }
 

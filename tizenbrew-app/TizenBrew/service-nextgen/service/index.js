@@ -75,10 +75,11 @@ module.exports.onStart = function () {
 
     loadModules().then(modules => {
         modulesCache = modules;
-        const serviceModuleList = readConfig().autoLaunchServiceList;
+        let serviceModuleList = readConfig().autoLaunchServiceList || [];
+        if (typeof serviceModuleList === 'string') serviceModuleList = serviceModuleList ? [serviceModuleList] : [];
         if (serviceModuleList.length > 0) {
             serviceModuleList.forEach(module => {
-                const service = modules.find(m => m.name === module);
+                const service = modules.find(m => m.fullName === module || m.name === module);
                 if (service) startService(service, services);
             });
         }
@@ -263,7 +264,8 @@ module.exports.onStart = function () {
                             break;
                         }
                         case 'autolaunchService': {
-                            config.autoLaunchServiceList = module;
+                            // Era salvo como texto, o que quebrava o forEach do início do serviço.
+                            config.autoLaunchServiceList = module ? [module] : [];
                             writeConfig(config);
                             break;
                         }
