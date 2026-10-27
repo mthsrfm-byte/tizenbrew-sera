@@ -16,7 +16,7 @@
         "addNPM": "Adicionar do NPM",
         "addNPMDesc": "Pra apps publicados no NPM, tipo o TizenTube.",
         "addGH": "Adicionar do GitHub",
-        "addGHDesc": "Seu repositório já vem preenchido. Só falta a pasta.",
+        "addGHDesc": "Seu usuário já vem preenchido. Só falta o nome do repositório.",
         "addModule": "Adicionar app",
         "moduleName": "Nome do app ({{type}}):"
     },

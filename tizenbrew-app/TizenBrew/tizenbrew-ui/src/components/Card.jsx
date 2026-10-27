@@ -34,8 +34,8 @@ export default function Card({ children, onClick, shouldFocus, className = '', s
 export function PageTitle({ title, subtitle }) {
     return (
         <div className="mb-[4vh]">
-            <h1 className="text-[4.6vh] font-bold leading-tight">{title}</h1>
-            {subtitle ? <p className="text-slate-400 text-[2.4vh] mt-[0.8vh]">{subtitle}</p> : null}
+            <h1 className="font-display text-[4.8vh] font-extrabold tracking-tight leading-tight">{title}</h1>
+            {subtitle ? <p className="text-[#A3A19A] text-[2.4vh] mt-[0.8vh]">{subtitle}</p> : null}
         </div>
     );
 }

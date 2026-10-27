@@ -57,10 +57,10 @@ export default function UserAgentSettings() {
                                 tizen.application.getCurrentApplication().exit();
                             }
                         }} shouldFocus={idx === 0}>
-                            <h3 className='text-sky-400 text-[2.8vh] font-bold'>
+                            <h3 className='text-[#A9B4F5] text-[2.8vh] font-bold'>
                                 {t(ua.name)}
                             </h3>
-                            <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
+                            <p className='text-[#D9D7D0] mt-[1.5vh] text-[2.2vh] leading-snug'>
                                 {ua.worksOnTizen ? t('settings.worksOnTizen', { version: ua.worksOnTizen }) : ''}
                             </p>
                         </ItemBasic>
@@ -71,7 +71,7 @@ export default function UserAgentSettings() {
                     alert(t('settings.uaSetRelaunch'));
                     tizen.application.getCurrentApplication().exit();
                 }}>
-                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
+                    <h3 className='text-[#A9B4F5] text-[2.8vh] font-bold'>
                         {t('settings.default')}
                     </h3>
                 </ItemBasic>

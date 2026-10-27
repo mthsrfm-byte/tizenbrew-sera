@@ -22,10 +22,10 @@ export default function Settings() {
                     if (state.sharedData.modules?.length === 0) return alert(t('settings.noModules'));
                     loc.route('/tizenbrew-ui/dist/index.html/settings/change?type=autolaunch');
                 }}>
-                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
+                    <h3 className='text-[#A9B4F5] text-[2.8vh] font-bold'>
                         {t('settings.autolaunch')}
                     </h3>
-                    <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
+                    <p className='text-[#D9D7D0] mt-[1.5vh] text-[2.2vh] leading-snug'>
                         {t('settings.autolaunchDesc')}
                     </p>
                 </ItemBasic>
@@ -33,20 +33,20 @@ export default function Settings() {
                     if (state.sharedData.modules?.length === 0) return alert(t('settings.noModules'));
                     loc.route('/tizenbrew-ui/dist/index.html/settings/change?type=autolaunchService');
                 }}>
-                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
+                    <h3 className='text-[#A9B4F5] text-[2.8vh] font-bold'>
                         {t('settings.autolaunchService')}
                     </h3>
-                    <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
+                    <p className='text-[#D9D7D0] mt-[1.5vh] text-[2.2vh] leading-snug'>
                         {t('settings.autolaunchServiceDesc')}
                     </p>
                 </ItemBasic>
                 <ItemBasic onClick={() => {
                     loc.route('/tizenbrew-ui/dist/index.html/settings/change-ua');
                 }}>
-                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
+                    <h3 className='text-[#A9B4F5] text-[2.8vh] font-bold'>
                         {t('settings.useragent')}
                     </h3>
-                    <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
+                    <p className='text-[#D9D7D0] mt-[1.5vh] text-[2.2vh] leading-snug'>
                         {t('settings.useragentDesc')}
                     </p>
                 </ItemBasic>
@@ -84,11 +84,11 @@ function Change() {
                                 }
                             }}>
                             <h3
-                                className='text-sky-400 text-[2.8vh] font-bold'
+                                className='text-[#A9B4F5] text-[2.8vh] font-bold'
                             >
                                 {module.appName} ({module.version})
                             </h3>
-                            <p className='text-slate-300 mt-[1.5vh] text-[2.2vh] leading-snug'>
+                            <p className='text-[#D9D7D0] mt-[1.5vh] text-[2.2vh] leading-snug'>
                                 {module.description}
                             </p>
                         </ItemBasic>
@@ -109,7 +109,7 @@ function Change() {
                             setFocus('nav-home');
                         }
                     }}>
-                    <h3 className='text-sky-400 text-[2.8vh] font-bold'>
+                    <h3 className='text-[#A9B4F5] text-[2.8vh] font-bold'>
                         {t('settings.disableAutolaunch')}
                     </h3>
                 </ItemBasic>
