@@ -142,10 +142,12 @@ function AddModule() {
                     <Field label="Nome do pacote" value={pkg} onChange={setPkg} placeholder="ex.: @foxreis/tizentube" shouldFocus />
                 </>
             )}
-            <p className="text-[2.2vh] text-[#A3A19A] mt-[3vh]">
-                Vai instalar: <span className="text-white font-mono">{target || '—'}</span>
-            </p>
-            <Card onClick={add} className="primary-btn mt-[2vh]">Adicionar app</Card>
+            <div className="flex items-center mt-[2.4vh]">
+                <Card onClick={add} className="primary-btn">Adicionar app</Card>
+                <p className="text-[2.2vh] text-[#A3A19A] ml-[2vw]">
+                    Vai instalar: <span className="text-[#F5F4EF] font-mono">{target || '—'}</span>
+                </p>
+            </div>
         </div>
     )
 }

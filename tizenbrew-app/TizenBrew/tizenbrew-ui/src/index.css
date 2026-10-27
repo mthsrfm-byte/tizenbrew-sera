@@ -160,15 +160,15 @@ html, body {
 
 .field {
     display: block;
-    padding: 2vh 1.6vw;
-    margin-bottom: 2.4vh;
+    padding: 1.4vh 1.4vw;
+    margin-bottom: 1.6vh;
 }
 
 .field-input {
     display: block;
     width: 100%;
-    margin-top: 1vh;
-    padding: 1.4vh 1vw;
+    margin-top: 0.6vh;
+    padding: 1vh 1vw;
     border-radius: 1.4vh;
     background: #111110;
     border: 0.25vh solid rgba(245, 244, 239, 0.1);
@@ -284,4 +284,14 @@ html, body {
 @keyframes loadbar {
     from { transform: translateX(-6vh); }
     to { transform: translateX(18vh); }
+}
+
+.sera-tile {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 22%;
+    color: #F5F4EF;
+    background: radial-gradient(circle at 50% 40%, rgba(51, 71, 255, 0.55), rgba(51, 71, 255, 0) 70%), #111110;
+    border: 0.25vh solid rgba(245, 244, 239, 0.1);
 }

@@ -2,7 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import resources from './i18nResources.js';
 
-// O Seraflix+ é sempre em português, independente do idioma da TV.
+// O SerafimFlix+ é sempre em português, independente do idioma da TV.
 i18n
   .use(initReactI18next)
   .init({

@@ -62,17 +62,9 @@ export function launchModule(module, state) {
 export function BrandIcon({ id, name, className = '' }) {
     if (id === 'seraflix') {
         return (
-            <svg viewBox="0 0 512 512" className={className}>
-                <defs>
-                    <linearGradient id="sf-g" x1="0" y1="0" x2="1" y2="1">
-                        <stop offset="0" stop-color="#3b82f6" />
-                        <stop offset="1" stop-color="#0b2a6b" />
-                    </linearGradient>
-                </defs>
-                <rect width="512" height="512" rx="110" fill="url(#sf-g)" />
-                <text x="256" y="360" font-family="sans-serif" font-weight="bold" font-size="300" fill="#fff" text-anchor="middle">S</text>
-                <path d="M330 300l70 40-70 40z" fill="#facc15" />
-            </svg>
+            <span className={`sera-tile ${className}`}>
+                <SeraMark className="w-[80%] h-auto" />
+            </span>
         );
     }
     if (id === 'youtube') {
